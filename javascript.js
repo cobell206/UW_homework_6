@@ -22,7 +22,8 @@ var get_city = function(city) {
     .then(function(data) {
         
         // Fill in current weather
-        $("#current_city").text("Current city: " + city)
+        var day_ = data.list[0].dt_txt.slice(0,10)
+        $("#current_city").text("Current city: " + city + " (" + day_ + ")")
         $("#temp").text("Temperature: " + data.list[0].main.temp + " F")
         $("#humidity").text("Humidity: " + data.list[0].main.humidity + " %")
         $("#wind_speed").text("Wind Speed: " + data.list[0].wind.speed + " MPH")
@@ -31,11 +32,11 @@ var get_city = function(city) {
         for (var i=0; i<5; i++) {
 
             // Pull data from list
-            day_ = data.list[(i+1)*8 - 1].dt_txt.slice(0,10)
-            temp_ = data.list[(i+1)*8 - 1].main.temp
-            humidity_ = data.list[(i+1)*8 - 1].main.humidity
-            img_code = data.list[(i+1)*8 - 1].weather[0].icon
-            url = 'http://openweathermap.org/img/wn/' + img_code + '.png'
+            var day_ = data.list[(i+1)*8 - 1].dt_txt.slice(0,10)
+            var temp_ = data.list[(i+1)*8 - 1].main.temp
+            var humidity_ = data.list[(i+1)*8 - 1].main.humidity
+            var img_code = data.list[(i+1)*8 - 1].weather[0].icon
+            var url = 'http://openweathermap.org/img/wn/' + img_code + '.png'
 
             // Populate cards
             $("#day" + i).text(day_)
