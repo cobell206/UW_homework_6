@@ -14,6 +14,7 @@ var get_city = function(city) {
             return reponse.json()
         }
         else {
+            alert("City not found, try again...")
             throw new Error("Didn't work")
         }
         
