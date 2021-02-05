@@ -32,7 +32,12 @@ var get_city = function(city) {
 
         for (var i=0; i<5; i++) {
             day_ = data.list[(i+1)*8 - 1].dt_txt.slice(0,10)
+            temp_ = data.list[(i+1)*8 - 1].main.temp
+            humidity_ = data.list[(i+1)*8 - 1].main.humidity
             $("#day" + i).text(day_)
+            $("#temp" + i).text("Temp: " + temp_ + " F")
+            $("#humidity" + i).text("Humidity: " + humidity_ + " %")
+
         }
         console.log(data.list);
     })
