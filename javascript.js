@@ -20,31 +20,32 @@ var get_city = function(city) {
     })
     .then(function(data) {
         
+        // Fill in current weather
         $("#current_city").text("Current city: " + city)
         $("#temp").text("Temperature: " + data.list[0].main.temp + " F")
         $("#humidity").text("Humidity: " + data.list[0].main.humidity + " %")
         $("#wind_speed").text("Wind Speed: " + data.list[0].wind.speed + " MPH")
-        day1 = data.list[7]
-        day2 = data.list[15]
-        day3 = data.list[23]
-        day4 = data.list[31]
-        day5 = data.list[39]
+        
 
         for (var i=0; i<5; i++) {
+
+            // Pull data from list
             day_ = data.list[(i+1)*8 - 1].dt_txt.slice(0,10)
             temp_ = data.list[(i+1)*8 - 1].main.temp
             humidity_ = data.list[(i+1)*8 - 1].main.humidity
+            img_code = data.list[(i+1)*8 - 1].weather[0].icon
+            url = 'http://openweathermap.org/img/wn/' + img_code + '.png'
+
+            // Populate cards
             $("#day" + i).text(day_)
             $("#temp" + i).text("Temp: " + temp_ + " F")
             $("#humidity" + i).text("Humidity: " + humidity_ + " %")
-
+            $("#img" + i).attr("src", url)
         }
         console.log(data.list);
     })
     
 }
-
-console.log(get_city(city));
 
 // Button click for searching a city
 $("#search_button").on("click", function() {
@@ -55,3 +56,5 @@ $("#search_button").on("click", function() {
 $(".city_btn").on("click", function() {
     get_city($(this).attr("data-value"))
 })
+
+get_city(city)
